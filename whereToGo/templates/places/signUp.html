@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Регистрация {% endblock %}
+{% block content %}
+    <h3>Регистрация </h3>
+    <h5>{{ message }}</h5>
+    <form action="{% url 'signUpButtonPressed' %}" method="post" autocomplete="on" id="form_entry">
+        {% csrf_token %}
+        Логин: <input type="text" required placeholder="Логин" name="login" /><br>
+        Пароль: <input type="password" required placeholder="Пароль" name="password" /><br>
+        Пароль (снова): <input type="password" required placeholder="Пароль (снова)" name="password_again" /><br>
+        Пол:
+        <input type="radio" id="radio_1" value="M" name="sex" checked/><label for="radio_1">Мужской</label>
+        <input type="radio" id="radio_2" value="F" name="sex" /><label for="radio_2">Женский</label><br>
+        Дата рождения: <input type="date" id="date" name="date" min="1910-01-01" max="2012-12-31"/><br>
+        <button type="submit" id="user_sign_in">Зарегистрироваться</button><br>
+    </form>
+{% endblock %}

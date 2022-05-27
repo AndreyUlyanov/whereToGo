@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} {{ place.name }} {% endblock %}
+{% block content %}
+    <h3>Название:</h3> {{ place.name }}<br>
+    <h3>Адрес:</h3> {{ place.address }}<br>
+    {% if averege_mark is not None %}
+        <h3>Средняя оценка:</h3> {{ averege_mark }}<br>
+    {% else %}
+        <h3>Пока оценок нет. Поставьте оценку первым.</h3>
+    {% endif %}
+
+    {% if place.square is not None %}
+        <h3>Площадь:</h3> {{ place.square }} га<br>
+    {% endif %}
+    {% if place.link is not None %}
+        <h3>Ссылка:</h3> <a href="http://{{ place.link }}" target="_blank">{{ place.link }}</a><br>
+    {% endif %}
+
+
+    <h3>Категории:</h3>
+    {% for category in category_list %}
+        {{ category.category.category }}
+    {% endfor %}
+
+    <h3>Район:</h3>
+    {% for region in region_list %}
+        {{ region.region.region }}
+    {% endfor %}
+
+    {% if user != 0 %}
+        <br>
+        <h3>Оценить:</h3>
+        {{ message }}
+        <form action="{% url score_command place.place_id user %}" method="post" autocomplete="on" id="form_entry">
+            {% csrf_token %}
+            Ваша оценка:
+            <label><input type="text" required placeholder="Оценка" name="score" /></label><br>
+            <button type="submit" id="rating_place">Оценить</button><br>
+        </form>
+    {% endif %}
+
+{% endblock %}

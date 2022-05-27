@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Места Санкт-Петербурга и Ленинградской области{% endblock %}</title>
+    <style>
+        header { text-align: center; }
+        nav { overflow: hidden; background-color: #1731a1; font-family: Arial, Helvetica, sans-serif; }
+        nav a { float: left; font-size: 16px; color: white; text-align: center; padding: 16px 16px; text-decoration: none; }
+        main { font-size: 16px; color: #000000; margin-top: 20px; }
+        nav a.right {float: right; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Места Санкт-Петербурга и Ленинградской области</h1>
+    </header>
+    <nav>
+        <a href="{% url 'home' user %}">Главная</a>
+{#        <a href="{% url 'places' user %}">Культурные места</a>#}
+{#        <a href="{% url 'compilations' user %}">Подборка</a>#}
+
+        {% if user == 0 %}
+            <a class="right" href="{% url 'sign-up' %}">Регистрация</a>
+            <a class="right" href="{% url 'sign-in' %}">Войти</a>
+        {% else %}
+            <a class="right" href="{% url 'sign-out' %}">Выйти</a>
+            <a class="right" href="{% url 'profile' user %}">Профиль</a>
+        {% endif %}
+
+    </nav>
+    <br>
+    <main>
+        {% block content %} {% endblock %}
+    </main>

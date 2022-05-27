@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} Войти {% endblock %}
+{% block content %}
+    <h3>Войти </h3>
+    <h5>{{ message }}</h5>
+    <form action="{% url 'signInButtonPressed' %}" method="post" autocomplete="on" id="form_entry">
+        {% csrf_token %}
+        Login: <input type="text" required placeholder="Login" name="login" /><br>
+        Password: <input type="password" required placeholder="Password" name="password" /><br>
+        <button type="submit" id="user_sign_in">Войти</button><br>
+    </form>
+
+{% endblock %}
