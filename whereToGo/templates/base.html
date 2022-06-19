@@ -17,8 +17,8 @@
     </header>
     <nav>
         <a href="{% url 'home' user %}">Главная</a>
-{#        <a href="{% url 'places' user %}">Культурные места</a>#}
-{#        <a href="{% url 'compilations' user %}">Подборка</a>#}
+        <a href="{% url 'places' user %}">Культурные места</a>
+        <a href="{% url 'compilations' user %}">Подборки</a>
 
         {% if user == 0 %}
             <a class="right" href="{% url 'sign-up' %}">Регистрация</a>
@@ -33,3 +33,5 @@
     <main>
         {% block content %} {% endblock %}
     </main>
+</body>
+</html>

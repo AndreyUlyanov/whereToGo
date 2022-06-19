@@ -13,5 +13,9 @@ urlpatterns = [
     path('place/<int:place_id>/<int:user>/', views.place, name='place'),
     path('ratingPlace/<int:place_id>/<int:user>/', views.ratingPlace, name='ratingPlace'),
     path('revaluePlace/<int:place_id>/<int:user>/', views.revaluePlace, name='revaluePlace'),
+    path('places/<int:user>/', views.all_places, name='places'),
+    path('search-results/<int:user>/', views.search_results, name='searchResults'),
+    path('filtered-results/<int:user>/', views.filter_places, name='filter'),
+    path('compilations/<int:user>/', views.compilations, name='compilations')
 
 ]

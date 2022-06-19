@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Фильтрация мест {% endblock %}
+{% block content %}
+    {{ message }}
+    <form action="{% url 'searchResults' user %}" method="post" autocomplete="on" id="form_entry">
+        {% csrf_token %}
+        <h3>Поиск:</h3>
+        <label><input type="text" required name="search" /></label><br>
+        <button type="submit" id="searchResults">Искать</button><br>
+    </form>
+
+    <br>
+
+    <form action="{% url 'filter' user %}" method="post">
+        {% csrf_token %}
+
+        <h3>Категория:</h3>
+        {% for category in categories %}
+            <input type="checkbox" name="category" value={{ category.category }}> {{ category.category }} <br>
+        {% endfor %}
+
+        <h3>Район:</h3>
+        {% for region in regions %}
+            <input type="checkbox" name="region" value={{ region.region }}> {{ region.region }} <br>
+        {% endfor %}
+
+        <h3>Ближайшее метро:</h3>
+        {% for station in metro %}
+            <input type="checkbox" name="metro" value={{ station.name }}> {{ station.name }} <br>
+        {% endfor %}
+
+        <br><button type="submit" id="filter">Отфильтровать</button><br>
+
+    </form>
+
+
+{% endblock %}

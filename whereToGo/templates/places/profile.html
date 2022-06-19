@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Профиль {% endblock %}
+{% block content %}
+    <h3>Логин: </h3>
+    {{ user_info.login }}
+
+    <h3>Рекомендации: </h3>
+    {% for place_id, distance in recommendations %}
+        <a href="{% url 'place' place_id user %}">{{ place_id }}</a>
+    {% endfor %}
+
+    <h3>Поставленные оценки:</h3>
+    {% for info in user_marks %}
+        <a href="{% url 'place' info.place_id user %}">Место {{ info.place_id }}</a>: оценка - {{ info.score }} <br>
+    {% endfor %}
+
+    {% if user_marks.has_previous %}
+        <a href="?page={{ user_marks.previous_page_number }}">&lt;</a>
+    {% endif %}
+
+    {% if user_marks.has_next %}
+        <a href="?page={{ user_marks.next_page_number }}">&gt;</a>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block title %} {{ place.name }} {% endblock %}
 {% block content %}
+    {{ scores }}<br>
+
+
     <h3>Название:</h3> {{ place.name }}<br>
     <h3>Адрес:</h3> {{ place.address }}<br>
-    {% if averege_mark is not None %}
-        <h3>Средняя оценка:</h3> {{ averege_mark }}<br>
+    {% if avg_mark is not None %}
+        <h3>Средняя оценка:</h3> {{ avg_mark }}<br>
     {% else %}
         <h3>Пока оценок нет. Поставьте оценку первым.</h3>
     {% endif %}
@@ -38,5 +41,12 @@
             <button type="submit" id="rating_place">Оценить</button><br>
         </form>
     {% endif %}
+
+
+    <h3>Похожие места:</h3>
+    {% for place_id, distance in similar_places %}
+        <a href="{% url 'place' place_id user %}">{{ place_id }}</a>
+    {% endfor %}
+
 
 {% endblock %}

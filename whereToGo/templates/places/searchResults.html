@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Поиск {% endblock %}
+{% block content %}
+    <a href="{% url 'places' user %}">Назад к поиску.</a><br><br>
+
+    {% for place in results %}
+        <a href="{% url 'place' place.place_id user %}">{{ place.name }}</a><br>
+    {% endfor %}
+
+    <br>
+
+    {% if results.has_previous %}
+        <form action="?page={{ results.previous_page_number }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ query }}" name="query">
+            <button type="submit" id="next">&lt;</button>
+        </form>
+    {% endif %}
+
+    {% if results.has_next %}
+        <form action="?page={{ results.next_page_number }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ query }}" name="query">
+            <button type="submit" id="next">&gt;</button>
+        </form>
+    {% endif %}
+
+
+{% endblock %}
